@@ -12,13 +12,8 @@ INSERT INTO `Department` (`deptID`, `deptName`) VALUES
 (1,  'Grocery'),
 (2,  'Technology'),
 (3,  'Clothing'),
-(4,  'Home Goods'),
-(5,  'Toys'),
-(6,  'Pharmacy'),
-(7,  'Beauty'),
-(8,  'Sporting Goods'),
-(9,  'Furniture'),
-(10, 'Automotive');
+(4,  'Customer Service'),
+(5,  'Management');
 
 -- -----------------------------------------------------
 -- Locations (10 rows)
@@ -200,17 +195,17 @@ INSERT INTO `RedCard` (`custID`, `cardNumber`, `savings`) VALUES
 -- -----------------------------------------------------
 INSERT INTO `Employee` (`employeeID`, `deptID`, `managerID`, `emplyoeeDiscount`, `firstName`, `lastName`, `streetAddress`, `city`, `state`, `zipCode`, `hoursPerWeek`, `vendorID`, `locID`, `position`) VALUES
 -- Managers
-('E00001', 1, NULL,     0.20, 'Linda',   'Carter',   '15 Lincoln Ave',   'Naperville',  'IL', '60540', 40.00, NULL, 1,  'Store Manager'),
-('E00002', 2, NULL,     0.20, 'Robert',  'Hughes',   '902 Garfield St',  'Aurora',      'IL', '60505', 40.00, NULL, 2,  'Store Manager'),
-('E00003', 3, NULL,     0.20, 'Angela',  'Foster',   '47 Jackson Blvd',  'Joliet',      'IL', '60435', 42.50, NULL, 3,  'Store Manager'),
+('E00001', 5, NULL,     0.20, 'Linda',   'Carter',   '15 Lincoln Ave',   'Naperville',  'IL', '60540', 40.00, NULL, 1,  'Store Manager'),
+('E00002', 5, NULL,     0.20, 'Robert',  'Hughes',   '902 Garfield St',  'Aurora',      'IL', '60505', 40.00, NULL, 2,  'Store Manager'),
+('E00003', 5, NULL,     0.20, 'Angela',  'Foster',   '47 Jackson Blvd',  'Joliet',      'IL', '60435', 42.50, NULL, 3,  'Store Manager'),
 -- Staff reporting to E00001
 ('E00004', 1, 'E00001', 0.10, 'Kevin',   'Murphy',   '318 Washington Rd','Naperville',  'IL', '60564', 32.00, NULL, 1,  'Grocery Clerk'),
-('E00005', 1, 'E00001', 0.10, 'Priya',   'Shah',     '77 Madison Ct',    'Lisle',       'IL', '60532', 28.50, 1,    1,  'Vendor Liaison'),
+('E00005', 4, 'E00001', 0.10, 'Priya',   'Shah',     '77 Madison Ct',    'Lisle',       'IL', '60532', 28.50, 1,    1,  'Vendor Liaison'),
 ('E00006', 3, 'E00001', 0.10, 'Tyler',   'Reed',     '260 Monroe St',    'Naperville',  'IL', '60540', 25.00, NULL, 1,  'Sales Associate'),
 -- Staff reporting to E00002
 ('E00007', 2, 'E00002', 0.15, 'Nina',    'Gonzalez', '5 Adams Way',      'Aurora',      'IL', '60506', 36.00, NULL, 2,  'Tech Specialist'),
 ('E00008', 2, 'E00002', 0.10, 'Marcus',  'Lee',      '412 Harrison Dr',  'Aurora',      'IL', '60504', 30.00, 3,    2,  'Vendor Liaison'),
-('E00009', 1, 'E00002', 0.10, 'Hannah',  'Cole',     '99 Tyler Ln',      'Oswego',      'IL', '60543', 20.00, NULL, 2,  'Cashier'),
+('E00009', 4, 'E00002', 0.10, 'Hannah',  'Cole',     '99 Tyler Ln',      'Oswego',      'IL', '60543', 20.00, NULL, 2,  'Cashier'),
 -- Staff reporting to E00003
 ('E00010', 3, 'E00003', 0.10, 'Samuel',  'Brooks',   '186 Polk St',      'Joliet',      'IL', '60432', 35.00, 5,    3,  'Clothing Associate'),
 ('E00011', 1, 'E00003', 0.10, 'Grace',   'Ortiz',    '23 Fillmore Ave',  'Plainfield',  'IL', '60544', 24.00, NULL, 3,  'Stocker'),
