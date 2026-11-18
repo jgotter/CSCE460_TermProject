@@ -74,7 +74,7 @@ public class data_insertion_jdbc {
 					+ "(14, '80',  3, 5,  4), "
 					+ "(15, '110', 3, 6,  5); ";
 			
-			String ordersTable = "INSERT INTO `targetOrders` (`orderNum`, `orderTotal`, `cardType`, `cardNumber`, `orderDate`, `onlineVSInStore`) VALUES "
+			String ordersTable = "INSERT INTO `target.Orders` (`orderNum`, `orderTotal`, `cardType`, `cardNumber`, `orderDate`, `onlineVSInStore`) VALUES "
 					+ "(1,  45.67,   'Visa',        '4111111111111111', '2026-09-01', 'In-Store'), "
 					+ "(2,  129.99,  'MasterCard',  '5500000000000004', '2026-09-03', 'Online'), "
 					+ "(3,  23.45,   NULL,          NULL,               '2026-09-05', 'In-Store'), "
@@ -105,7 +105,7 @@ public class data_insertion_jdbc {
 					+ "(11, 15, 5,  2), "
 					+ "(12, 1,  1,  4); ";
 			
-			String customersTable = "INSERT INTO `Customers` (`custID`, `firstName`, `lastName`, `streetAddress`, `city`, `state`, `zipCode`, `phoneNum`) VALUES "
+			String customersTable = "INSERT INTO `target.Customers` (`custID`, `firstName`, `lastName`, `streetAddress`, `city`, `state`, `zipCode`, `phoneNum`) VALUES "
 					+ "(1,  'Emily',   'Johnson',   '412 Maple St',      'Naperville',  'IL', '60540', '630-555-0101'), "
 					+ "(2,  'Michael', 'Rodriguez', '88 Oak Ave',        'Aurora',      'IL', '60505', '630-555-0102'), "
 					+ "(3,  'Sarah',   'Patel',     '1205 Elm Dr',       'Joliet',      'IL', '60431', '815-555-0103'), "
@@ -119,7 +119,7 @@ public class data_insertion_jdbc {
 					+ "(11, 'Olivia',  'Anderson',  '29 Harbor St',      'Naperville',  'IL', '60563', NULL), "
 					+ "(12, 'Ethan',   'Thomas',    '801 Ridge Rd',      'Aurora',      'IL', '60504', '630-555-0112');";
 			
-			String groceryTable = "INSERT INTO `Grocery` (`itemNum`, `itemName`, `deptID`, `stockID`, `expirationDate`, `price`) VALUES "
+			String groceryTable = "INSERT INTO `target.Grocery` (`itemNum`, `itemName`, `deptID`, `stockID`, `expirationDate`, `price`) VALUES "
 					+ "(1001, 'Whole Milk 1 Gallon',     1, 2, '2026-11-25', 3.89), "
 					+ "(1002, 'Large Eggs 12ct',         1, 2, '2026-12-05', 3.49), "
 					+ "(1003, 'Sourdough Bread Loaf',    1, 3, '2026-11-22', 4.29), "
