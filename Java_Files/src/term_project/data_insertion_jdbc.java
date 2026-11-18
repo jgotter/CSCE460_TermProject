@@ -131,6 +131,57 @@ public class data_insertion_jdbc {
 					+ "(1009, 'Chocolate Chip Cookies',  1, 3, '2027-02-14', 3.59), "
 					+ "(1010, 'Frozen Pizza Pepperoni',  1, 5, '2027-03-20', 6.49); ";
 
+			String technologyTable = "INSERT INTO `target`.`Technology` (`itemNum`, `itemName`, `deptID`, `stockID`, `price`) VALUES "
+					+ "(2001, 'Wireless Earbuds', 2, 6, 79.99),"
+					+ "(2002, '55\" 4K Smart TV', 2, 7, 399.99),"
+					+ "(2003, 'Bluetooth Speaker',  2, 6, 49.99),"
+					+ "(2004, 'Laptop 15.6\" 8GB', 2, 8, 649.00),"
+					+ "(2005, 'Tablet 10\" 64GB', 2, 8, 249.99),"
+					+ "(2006, 'USB-C Charging Cable 6ft', 2, 9, 14.99),"
+					+ "(2007, 'Gaming Headset', 2, 10, 59.99),"
+					+ "(2008, 'Smart Watch', 2, 9, 199.99),"
+					+ "(2009, 'Wireless Mouse', 2, 10, 24.99),"
+					+ "(2010, 'Portable Power Bank 10000mAh', 2, 7, 29.99);";
+			
+			String clothingTable = "INSERT INTO `target`.`Clothing` (`itemNum`, `itemName`, `deptID`, `stockID`, `size`) VALUES "
+					+ "(3001, 'Men''s Crew Neck T-Shirt', 3, 11, 'M'),"
+					+ "(3002, 'Women''s Skinny Jeans', 3, 12, 'S'),"
+					+ "(3003, 'Men''s Hooded Sweatshirt', 3, 13, 'L'),"
+					+ "(3004, 'Women''s Yoga Leggings', 3, 14, 'XS'),"
+					+ "(3005, 'Kids'' Rain Jacket', 3, 15, 'S'),"
+					+ "(3006, 'Men''s Denim Jacket', 3, 12, 'XL'),"
+					+ "(3007, 'Women''s Cardigan', 3, 11, 'M'),"
+					+ "(3008, 'Men''s Athletic Shorts', 3, 13, 'L'),"
+					+ "(3009, 'Women''s Button-Up Blouse', 3, 14, 'M'),"
+					+ "(3010, 'Unisex Fleece Pullover', 3, 15, 'XL');";
+			
+			
+			String redCardTable = "INSERT INTO `target`.`RedCard` (`custID`, `cardNumber`, `savings`) VALUES "
+					+ "(1, '7000100001', 45.20),"
+					+ "(2, '7000100002', 12.75),"
+					+ "(3, '7000100003', 88.40),"
+					+ "(4, '7000100004', 0.00),"
+					+ "(5, '7000100005', 130.15),"
+					+ "(6, '7000100006', 27.60),"
+					+ "(7, '7000100007', 64.30),"
+					+ "(8, '7000100008', NULL),"
+					+ "(9, '7000100009', 19.99),"
+					+ "(10, '7000100010', 52.05);";
+			
+			String employeeTable = "INSERT INTO `target`.`Employee` (`employeeID`, `deptID`, `managerID`, `emplyoeeDiscount`, `firstName`, `lastName`, `streetAddress`, `city`, `state`, `zipCode`, `hoursPerWeek`, `vendorID`, `locID`, `position`) VALUES "
+					+ "('E00001', 5, NULL, 0.20, 'Linda', 'Carter', '15 Lincoln Ave', 'Naperville', 'IL', '60540', 40.00, NULL, 1, 'Store Manager'),"
+					+ "('E00002', 5, NULL, 0.20, 'Robert', 'Hughes', '902 Garfield St', 'Aurora', 'IL', '60505', 40.00, NULL, 2, 'Store Manager'),"
+					+ "('E00003', 5, NULL, 0.20, 'Angela', 'Foster', '47 Jackson Blvd', 'Joliet', 'IL', '60435', 42.50, NULL, 3, 'Store Manager'),"
+					+ "('E00004', 1, 'E00001', 0.10, 'Kevin', 'Murphy', '318 Washington Rd', 'Naperville', 'IL', '60564', 32.00, NULL, 1, 'Grocery Clerk'),"
+					+ "('E00005', 4, 'E00001', 0.10, 'Priya', 'Shah', '77 Madison Ct', 'Lisle', 'IL', '60532', 28.50, 1, 1, 'Vendor Liaison'),"
+					+ "('E00006', 3, 'E00001', 0.10, 'Tyler', 'Reed', '260 Monroe St', 'Naperville', 'IL', '60540', 25.00, NULL, 1, 'Sales Associate'),"
+					+ "('E00007', 2, 'E00002', 0.15, 'Nina', 'Gonzalez', '5 Adams Way', 'Aurora', 'IL', '60506', 36.00, NULL, 2, 'Tech Specialist'),"
+					+ "('E00008', 2, 'E00002', 0.10, 'Marcus', 'Lee', '412 Harrison Dr', 'Aurora', 'IL', '60504', 30.00, 3, 2, 'Vendor Liaison'),"
+					+ "('E00009', 4, 'E00002', 0.10, 'Hannah', 'Cole', '99 Tyler Ln', 'Oswego', 'IL', '60543', 20.00, NULL, 2, 'Cashier'),"
+					+ "('E00010', 3, 'E00003', 0.10, 'Samuel', 'Brooks', '186 Polk St', 'Joliet', 'IL', '60432', 35.00, 5, 3, 'Clothing Associate'),"
+					+ "('E00011', 1, 'E00003', 0.10, 'Grace', 'Ortiz', '23 Fillmore Ave', 'Plainfield', 'IL', '60544', 24.00, NULL, 3, 'Stocker'),"
+					+ "('E00012', 2, 'E00003', 0.15, 'Jordan', 'Pierce', '710 Pierce Rd', 'Joliet', 'IL', '60435', 38.75, NULL, 3, 'Electronics Lead');";
+
 
 			Statement stmt = conn.createStatement();
 			
@@ -142,6 +193,10 @@ public class data_insertion_jdbc {
 			boolean orderDetailsTableResults = stmt.execute(orderDetailsTable);
 			boolean customersTableResults = stmt.execute(customersTable);
 			boolean groceryTableResults = stmt.execute(groceryTable);
+			boolean technologyTableResults = stmt.execute(technologyTable);
+			boolean clothingTableResults = stmt.execute(clothingTable);
+			boolean redCardTableResults = stmt.execute(redCardTable);
+			boolean employeeTableResults = stmt.execute(employeeTable);
 			
 			
 			System.out.println("DB table insertion was successful");
