@@ -5,22 +5,22 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema mytarget
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema mytarget
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `mytarget` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
 -- Schema target
 -- -----------------------------------------------------
-USE `mydb` ;
+USE `mytarget` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Customers`
+-- Table `mytarget`.`Customers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Customers` (
+CREATE TABLE IF NOT EXISTS `mytarget`.`Customers` (
   `custID` INT NOT NULL,
   `firstName` VARCHAR(45) NOT NULL,
   `lastName` VARCHAR(45) NOT NULL,
@@ -30,13 +30,13 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Customers` (
   `zipCode` VARCHAR(5) NOT NULL,
   `phoneNum` VARCHAR(12) NULL,
   PRIMARY KEY (`custID`))
-ENGINE = InnoDB;
+ENGINE = Innotarget;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Orders`
+-- Table `mytarget`.`Orders`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Orders` (
+CREATE TABLE IF NOT EXISTS `mytarget`.`Orders` (
   `orderNum` INT NOT NULL AUTO_INCREMENT,
   `orderTotal` DECIMAL(9,2) NOT NULL,
   `cardType` VARCHAR(24) NULL,
@@ -48,26 +48,26 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Orders` (
   INDEX `ordersCutID_idx` (`custID` ASC) VISIBLE,
   CONSTRAINT `ordersCutID`
     FOREIGN KEY (`custID`)
-    REFERENCES `mydb`.`Customers` (`custID`)
+    REFERENCES `mytarget`.`Customers` (`custID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = Innotarget;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Department`
+-- Table `mytarget`.`Department`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Department` (
+CREATE TABLE IF NOT EXISTS `mytarget`.`Department` (
   `deptID` INT NOT NULL,
   `deptName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`deptID`))
-ENGINE = InnoDB;
+ENGINE = Innotarget;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Locations`
+-- Table `mytarget`.`Locations`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Locations` (
+CREATE TABLE IF NOT EXISTS `mytarget`.`Locations` (
   `locID` INT NOT NULL,
   `locName` VARCHAR(45) NOT NULL,
   `streetAddress` VARCHAR(45) NOT NULL,
@@ -75,25 +75,25 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Locations` (
   `state` VARCHAR(2) NOT NULL,
   `zipCode` VARCHAR(5) NOT NULL,
   PRIMARY KEY (`locID`))
-ENGINE = InnoDB;
+ENGINE = Innotarget;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Vendors`
+-- Table `mytarget`.`Vendors`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Vendors` (
+CREATE TABLE IF NOT EXISTS `mytarget`.`Vendors` (
   `vendorID` INT NOT NULL,
   `vendorName` VARCHAR(45) NOT NULL,
   `vendorCity` VARCHAR(45) NOT NULL,
   `vendorState` VARCHAR(2) NOT NULL,
   PRIMARY KEY (`vendorID`))
-ENGINE = InnoDB;
+ENGINE = Innotarget;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Stock`
+-- Table `mytarget`.`Stock`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Stock` (
+CREATE TABLE IF NOT EXISTS `mytarget`.`Stock` (
   `stockID` INT NOT NULL,
   `qty` VARCHAR(45) NOT NULL,
   `deptID` INT NOT NULL,
@@ -105,26 +105,26 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Stock` (
   INDEX `locID_idx` (`locID` ASC) VISIBLE,
   CONSTRAINT `deptID`
     FOREIGN KEY (`deptID`)
-    REFERENCES `mydb`.`Department` (`deptID`)
+    REFERENCES `mytarget`.`Department` (`deptID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `vendorID`
     FOREIGN KEY (`vendorID`)
-    REFERENCES `mydb`.`Vendors` (`vendorID`)
+    REFERENCES `mytarget`.`Vendors` (`vendorID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `locID`
     FOREIGN KEY (`locID`)
-    REFERENCES `mydb`.`Locations` (`locID`)
+    REFERENCES `mytarget`.`Locations` (`locID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = Innotarget;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`OrderDetails`
+-- Table `mytarget`.`OrderDetails`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`OrderDetails` (
+CREATE TABLE IF NOT EXISTS `mytarget`.`OrderDetails` (
   `orderNum` INT NOT NULL,
   `stockID` INT NOT NULL,
   `locID` INT NOT NULL,
@@ -134,26 +134,26 @@ CREATE TABLE IF NOT EXISTS `mydb`.`OrderDetails` (
   INDEX `locID_idx` (`locID` ASC) VISIBLE,
   CONSTRAINT `stockID`
     FOREIGN KEY (`stockID`)
-    REFERENCES `mydb`.`Stock` (`stockID`)
+    REFERENCES `mytarget`.`Stock` (`stockID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `orderNum`
     FOREIGN KEY (`orderNum`)
-    REFERENCES `mydb`.`Orders` (`orderNum`)
+    REFERENCES `mytarget`.`Orders` (`orderNum`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `locationID`
     FOREIGN KEY (`locID`)
-    REFERENCES `mydb`.`Locations` (`locID`)
+    REFERENCES `mytarget`.`Locations` (`locID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = Innotarget;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Grocery`
+-- Table `mytarget`.`Grocery`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Grocery` (
+CREATE TABLE IF NOT EXISTS `mytarget`.`Grocery` (
   `itemNum` INT NOT NULL,
   `itemName` VARCHAR(45) NOT NULL,
   `deptID` INT NOT NULL,
@@ -165,21 +165,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Grocery` (
   INDEX `stockID_idx` (`stockID` ASC) VISIBLE,
   CONSTRAINT `groceryDeptID`
     FOREIGN KEY (`deptID`)
-    REFERENCES `mydb`.`Department` (`deptID`)
+    REFERENCES `mytarget`.`Department` (`deptID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `groceryStockID`
     FOREIGN KEY (`stockID`)
-    REFERENCES `mydb`.`Stock` (`stockID`)
+    REFERENCES `mytarget`.`Stock` (`stockID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = Innotarget;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Technology`
+-- Table `mytarget`.`Technology`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Technology` (
+CREATE TABLE IF NOT EXISTS `mytarget`.`Technology` (
   `itemNum` INT NOT NULL,
   `itemName` VARCHAR(45) NOT NULL,
   `deptID` INT NOT NULL,
@@ -190,21 +190,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Technology` (
   INDEX `stockID_idx` (`stockID` ASC) VISIBLE,
   CONSTRAINT `techDeptID`
     FOREIGN KEY (`deptID`)
-    REFERENCES `mydb`.`Department` (`deptID`)
+    REFERENCES `mytarget`.`Department` (`deptID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `techStockID`
     FOREIGN KEY (`stockID`)
-    REFERENCES `mydb`.`Stock` (`stockID`)
+    REFERENCES `mytarget`.`Stock` (`stockID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = Innotarget;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Clothing`
+-- Table `mytarget`.`Clothing`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Clothing` (
+CREATE TABLE IF NOT EXISTS `mytarget`.`Clothing` (
   `itemNum` INT NOT NULL,
   `itemName` VARCHAR(45) NOT NULL,
   `deptID` INT NOT NULL,
@@ -215,37 +215,37 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Clothing` (
   INDEX `stockID_idx` (`stockID` ASC) VISIBLE,
   CONSTRAINT `clothingDeptID`
     FOREIGN KEY (`deptID`)
-    REFERENCES `mydb`.`Department` (`deptID`)
+    REFERENCES `mytarget`.`Department` (`deptID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `clothingStockID`
     FOREIGN KEY (`stockID`)
-    REFERENCES `mydb`.`Stock` (`stockID`)
+    REFERENCES `mytarget`.`Stock` (`stockID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = Innotarget;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`RedCard`
+-- Table `mytarget`.`RedCard`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`RedCard` (
+CREATE TABLE IF NOT EXISTS `mytarget`.`RedCard` (
   `custID` INT NOT NULL,
   `cardNumber` VARCHAR(10) NOT NULL,
   `savings` DECIMAL(9,2) NULL,
   PRIMARY KEY (`custID`),
   CONSTRAINT `custID`
     FOREIGN KEY (`custID`)
-    REFERENCES `mydb`.`Customers` (`custID`)
+    REFERENCES `mytarget`.`Customers` (`custID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = Innotarget;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Employee`
+-- Table `mytarget`.`Employee`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Employee` (
+CREATE TABLE IF NOT EXISTS `mytarget`.`Employee` (
   `employeeID` VARCHAR(6) NOT NULL,
   `deptID` INT NOT NULL,
   `managerID` VARCHAR(6) NULL,
@@ -267,25 +267,25 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Employee` (
   INDEX `locationID_idx` (`locID` ASC) VISIBLE,
   CONSTRAINT `empDeptID`
     FOREIGN KEY (`deptID`)
-    REFERENCES `mydb`.`Department` (`deptID`)
+    REFERENCES `mytarget`.`Department` (`deptID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `managerID`
     FOREIGN KEY (`managerID`)
-    REFERENCES `mydb`.`Employee` (`employeeID`)
+    REFERENCES `mytarget`.`Employee` (`employeeID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `empVendorID`
     FOREIGN KEY (`vendorID`)
-    REFERENCES `mydb`.`Vendors` (`vendorID`)
+    REFERENCES `mytarget`.`Vendors` (`vendorID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `empLocID`
     FOREIGN KEY (`locID`)
-    REFERENCES `mydb`.`Locations` (`locID`)
+    REFERENCES `mytarget`.`Locations` (`locID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = Innotarget;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
