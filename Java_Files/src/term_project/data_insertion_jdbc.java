@@ -26,14 +26,14 @@ public class data_insertion_jdbc {
 	
 	private static void insertData(Connection conn) {
 		try {
-			String deptTable = "INSERT INTO `target.Department` (`deptID`, `deptName`) VALUES "
+			String deptTable = "INSERT INTO `Department` (`deptID`, `deptName`) VALUES "
 					+ "(1,  'Grocery'), "
 					+ "(2,  'Technology'), "
 					+ "(3,  'Clothing'), "
 					+ "(4,  'Customer Service'), "
 					+ "(5,  'Management');";
 			
-			String locationsTable = "INSERT INTO `target.Locations` (`locID`, `locName`, `streetAddress`, `city`, `state`, `zipCode`) VALUES "
+			String locationsTable = "INSERT INTO `Locations` (`locID`, `locName`, `streetAddress`, `city`, `state`, `zipCode`) VALUES "
 					+ "(1,  'Naperville Store',    '2751 Showplace Dr',       'Naperville',   'IL', '60564'), "
 					+ "(2,  'Aurora Store',        '2380 Orchard Gateway Blvd','Aurora',       'IL', '60506'), "
 					+ "(3,  'Joliet Store',        '1500 Louis Joliet Rd',    'Joliet',       'IL', '60435'), "
@@ -45,7 +45,7 @@ public class data_insertion_jdbc {
 					+ "(9,  'Elgin Store',         '1250 Randall Rd',         'Elgin',        'IL', '60123'), "
 					+ "(10, 'Lombard Store',       '1 Yorktown Center Dr',    'Lombard',      'IL', '60148');";
 			
-			String vendorsTable = "INSERT INTO `target.Vendors` (`vendorID`, `vendorName`, `vendorCity`, `vendorState`) VALUES "
+			String vendorsTable = "INSERT INTO `Vendors` (`vendorID`, `vendorName`, `vendorCity`, `vendorState`) VALUES "
 					+ "(1,  'Fresh Farms Distributors', 'Chicago',       'IL'), "
 					+ "(2,  'Prairie Dairy Co',         'Madison',       'WI'), "
 					+ "(3,  'TechSource Wholesale',     'San Jose',      'CA'), "
@@ -57,7 +57,7 @@ public class data_insertion_jdbc {
 					+ "(9,  'Lakeshore Beverages',      'Detroit',       'MI'), "
 					+ "(10, 'Comfort Wear Brands',      'Atlanta',       'GA'); ";
 			
-			String stockTable = "INSERT INTO `target.Stock` (`stockID`, `qty`, `deptID`, `vendorID`, `locID`) VALUES "
+			String stockTable = "INSERT INTO `Stock` (`stockID`, `qty`, `deptID`, `vendorID`, `locID`) VALUES "
 					+ "(1,  '250', 1, 1,  1), "
 					+ "(2,  '180', 1, 2,  2), "
 					+ "(3,  '320', 1, 7,  3), "
@@ -74,21 +74,35 @@ public class data_insertion_jdbc {
 					+ "(14, '80',  3, 5,  4), "
 					+ "(15, '110', 3, 6,  5); ";
 			
-			String ordersTable = "INSERT INTO `target.Orders` (`orderNum`, `orderTotal`, `cardType`, `cardNumber`, `orderDate`, `onlineVSInStore`) VALUES "
-					+ "(1,  45.67,   'Visa',        '4111111111111111', '2026-09-01', 'In-Store'), "
-					+ "(2,  129.99,  'MasterCard',  '5500000000000004', '2026-09-03', 'Online'), "
-					+ "(3,  23.45,   NULL,          NULL,               '2026-09-05', 'In-Store'), "
-					+ "(4,  899.00,  'Target Card', '3782822463100050', '2026-09-08', 'Online'), "
-					+ "(5,  67.80,   'Debit',       '6011000000000004', '2026-09-12', 'In-Store'), "
-					+ "(6,  15.99,   NULL,          NULL,               '2026-09-15', 'In-Store'), "
-					+ "(7,  249.50,  'Visa',        '4012888888881881', '2026-09-18', 'Online'), "
-					+ "(8,  78.25,   'MasterCard',  '5105105105105100', '2026-09-22', 'In-Store'), "
-					+ "(9,  34.10,   'Debit',       '6011111111111117', '2026-09-27', 'In-Store'), "
-					+ "(10, 1299.99, 'Target Card', '3530111333300000', '2026-10-02', 'Online'), "
-					+ "(11, 52.30,   'Visa',        '4222222222222222', '2026-10-06', 'In-Store'), "
-					+ "(12, 19.75,   NULL,          NULL,               '2026-10-10', 'In-Store'); ";
+			String customersTable = "INSERT INTO `Customers` (`custID`, `firstName`, `lastName`, `streetAddress`, `city`, `state`, `zipCode`, `phoneNum`) VALUES "
+					+ "(1,  'Emily',   'Johnson',   '412 Maple St',      'Naperville',  'IL', '60540', '630-555-0101'), "
+					+ "(2,  'Michael', 'Rodriguez', '88 Oak Ave',        'Aurora',      'IL', '60505', '630-555-0102'), "
+					+ "(3,  'Sarah',   'Patel',     '1205 Elm Dr',       'Joliet',      'IL', '60431', '815-555-0103'), "
+					+ "(4,  'David',   'Nguyen',    '73 Lakeview Ct',    'Schaumburg',  'IL', '60194', '847-555-0104'), "
+					+ "(5,  'Jessica', 'Williams',  '560 Birch Ln',      'Oak Brook',   'IL', '60523', '630-555-0105'), "
+					+ "(6,  'Daniel',  'Kim',       '2210 Pine Rd',      'Chicago',     'IL', '60614', '312-555-0106'), "
+					+ "(7,  'Ashley',  'Brown',     '918 Cedar Blvd',    'Evanston',    'IL', '60201', '847-555-0107'), "
+					+ "(8,  'Christopher','Davis',  '34 Willow Way',     'Bolingbrook', 'IL', '60440', '630-555-0108'), "
+					+ "(9,  'Megan',   'Martinez',  '147 Sunset Dr',     'Elgin',       'IL', '60120', '847-555-0109'), "
+					+ "(10, 'Brandon', 'Taylor',    '665 Prairie Ave',   'Lombard',     'IL', '60148', '630-555-0110'), "
+					+ "(11, 'Olivia',  'Anderson',  '29 Harbor St',      'Naperville',  'IL', '60563', NULL), "
+					+ "(12, 'Ethan',   'Thomas',    '801 Ridge Rd',      'Aurora',      'IL', '60504', '630-555-0112');";
 			
-			String orderDetailsTable = "INSERT INTO `target.OrderDetails` (`orderNum`, `stockID`, `locID`, `orderQTY`) VALUES "
+			String ordersTable = "INSERT INTO `Orders` (`orderNum`, `orderTotal`, `cardType`, `cardNumber`, `orderDate`, `onlineVSInStore`, `custID`) VALUES "
+					+ "(1,  45.67,   'Visa',        '4111111111111111', '2026-09-01', 'In-Store', 1), "
+					+ "(2,  129.99,  'MasterCard',  '5500000000000004', '2026-09-03', 'Online', 2), "
+					+ "(3,  23.45,   NULL,          NULL,               '2026-09-05', 'In-Store', 11), "
+					+ "(4,  899.00,  'Target Card', '3782822463100050', '2026-09-08', 'Online', 5), "
+					+ "(5,  67.80,   'Debit',       '6011000000000004', '2026-09-12', 'In-Store', 3), "
+					+ "(6,  15.99,   NULL,          NULL,               '2026-09-15', 'In-Store', 12), "
+					+ "(7,  249.50,  'Visa',        '4012888888881881', '2026-09-18', 'Online', 4), "
+					+ "(8,  78.25,   'MasterCard',  '5105105105105100', '2026-09-22', 'In-Store', 6), "
+					+ "(9,  34.10,   'Debit',       '6011111111111117', '2026-09-27', 'In-Store', 7), "
+					+ "(10, 1299.99, 'Target Card', '3530111333300000', '2026-10-02', 'Online', 8), "
+					+ "(11, 52.30,   'Visa',        '4222222222222222', '2026-10-06', 'In-Store', 9), "
+					+ "(12, 19.75,   NULL,          NULL,               '2026-10-10', 'In-Store', 10);";
+			
+			String orderDetailsTable = "INSERT INTO `OrderDetails` (`orderNum`, `stockID`, `locID`, `qty`) VALUES "
 					+ "(1,  1,  1,  3), "
 					+ "(1,  3,  3,  2), "
 					+ "(2,  11, 1,  2), "
@@ -105,21 +119,7 @@ public class data_insertion_jdbc {
 					+ "(11, 15, 5,  2), "
 					+ "(12, 1,  1,  4); ";
 			
-			String customersTable = "INSERT INTO `target.Customers` (`custID`, `firstName`, `lastName`, `streetAddress`, `city`, `state`, `zipCode`, `phoneNum`) VALUES "
-					+ "(1,  'Emily',   'Johnson',   '412 Maple St',      'Naperville',  'IL', '60540', '630-555-0101'), "
-					+ "(2,  'Michael', 'Rodriguez', '88 Oak Ave',        'Aurora',      'IL', '60505', '630-555-0102'), "
-					+ "(3,  'Sarah',   'Patel',     '1205 Elm Dr',       'Joliet',      'IL', '60431', '815-555-0103'), "
-					+ "(4,  'David',   'Nguyen',    '73 Lakeview Ct',    'Schaumburg',  'IL', '60194', '847-555-0104'), "
-					+ "(5,  'Jessica', 'Williams',  '560 Birch Ln',      'Oak Brook',   'IL', '60523', '630-555-0105'), "
-					+ "(6,  'Daniel',  'Kim',       '2210 Pine Rd',      'Chicago',     'IL', '60614', '312-555-0106'), "
-					+ "(7,  'Ashley',  'Brown',     '918 Cedar Blvd',    'Evanston',    'IL', '60201', '847-555-0107'), "
-					+ "(8,  'Christopher','Davis',  '34 Willow Way',     'Bolingbrook', 'IL', '60440', '630-555-0108'), "
-					+ "(9,  'Megan',   'Martinez',  '147 Sunset Dr',     'Elgin',       'IL', '60120', '847-555-0109'), "
-					+ "(10, 'Brandon', 'Taylor',    '665 Prairie Ave',   'Lombard',     'IL', '60148', '630-555-0110'), "
-					+ "(11, 'Olivia',  'Anderson',  '29 Harbor St',      'Naperville',  'IL', '60563', NULL), "
-					+ "(12, 'Ethan',   'Thomas',    '801 Ridge Rd',      'Aurora',      'IL', '60504', '630-555-0112');";
-			
-			String groceryTable = "INSERT INTO `target.Grocery` (`itemNum`, `itemName`, `deptID`, `stockID`, `expirationDate`, `price`) VALUES "
+			String groceryTable = "INSERT INTO `Grocery` (`itemNum`, `itemName`, `deptID`, `stockID`, `expirationDate`, `price`) VALUES "
 					+ "(1001, 'Whole Milk 1 Gallon',     1, 2, '2026-11-25', 3.89), "
 					+ "(1002, 'Large Eggs 12ct',         1, 2, '2026-12-05', 3.49), "
 					+ "(1003, 'Sourdough Bread Loaf',    1, 3, '2026-11-22', 4.29), "
@@ -130,8 +130,8 @@ public class data_insertion_jdbc {
 					+ "(1008, 'Bottled Water 24pk',      1, 4, '2027-08-30', 4.99), "
 					+ "(1009, 'Chocolate Chip Cookies',  1, 3, '2027-02-14', 3.59), "
 					+ "(1010, 'Frozen Pizza Pepperoni',  1, 5, '2027-03-20', 6.49); ";
-
-			String technologyTable = "INSERT INTO `target`.`Technology` (`itemNum`, `itemName`, `deptID`, `stockID`, `price`) VALUES "
+			
+			String technologyTable = "INSERT INTO `Technology` (`itemNum`, `itemName`, `deptID`, `stockID`, `price`) VALUES "
 					+ "(2001, 'Wireless Earbuds', 2, 6, 79.99),"
 					+ "(2002, '55\" 4K Smart TV', 2, 7, 399.99),"
 					+ "(2003, 'Bluetooth Speaker',  2, 6, 49.99),"
@@ -143,7 +143,7 @@ public class data_insertion_jdbc {
 					+ "(2009, 'Wireless Mouse', 2, 10, 24.99),"
 					+ "(2010, 'Portable Power Bank 10000mAh', 2, 7, 29.99);";
 			
-			String clothingTable = "INSERT INTO `target`.`Clothing` (`itemNum`, `itemName`, `deptID`, `stockID`, `size`) VALUES "
+			String clothingTable = "INSERT INTO `Clothing` (`itemNum`, `itemName`, `deptID`, `stockID`, `size`) VALUES "
 					+ "(3001, 'Men''s Crew Neck T-Shirt', 3, 11, 'M'),"
 					+ "(3002, 'Women''s Skinny Jeans', 3, 12, 'S'),"
 					+ "(3003, 'Men''s Hooded Sweatshirt', 3, 13, 'L'),"
@@ -156,7 +156,7 @@ public class data_insertion_jdbc {
 					+ "(3010, 'Unisex Fleece Pullover', 3, 15, 'XL');";
 			
 			
-			String redCardTable = "INSERT INTO `target`.`RedCard` (`custID`, `cardNumber`, `savings`) VALUES "
+			String redCardTable = "INSERT INTO `RedCard` (`custID`, `cardNumber`, `savings`) VALUES "
 					+ "(1, '7000100001', 45.20),"
 					+ "(2, '7000100002', 12.75),"
 					+ "(3, '7000100003', 88.40),"
@@ -168,7 +168,7 @@ public class data_insertion_jdbc {
 					+ "(9, '7000100009', 19.99),"
 					+ "(10, '7000100010', 52.05);";
 			
-			String employeeTable = "INSERT INTO `target`.`Employee` (`employeeID`, `deptID`, `managerID`, `emplyoeeDiscount`, `firstName`, `lastName`, `streetAddress`, `city`, `state`, `zipCode`, `hoursPerWeek`, `vendorID`, `locID`, `position`) VALUES "
+			String employeeTable = "INSERT INTO `Employee` (`employeeID`, `deptID`, `managerID`, `emplyoeeDiscount`, `firstName`, `lastName`, `streetAddress`, `city`, `state`, `zipCode`, `hoursPerWeek`, `vendorID`, `locID`, `position`) VALUES "
 					+ "('E00001', 5, NULL, 0.20, 'Linda', 'Carter', '15 Lincoln Ave', 'Naperville', 'IL', '60540', 40.00, NULL, 1, 'Store Manager'),"
 					+ "('E00002', 5, NULL, 0.20, 'Robert', 'Hughes', '902 Garfield St', 'Aurora', 'IL', '60505', 40.00, NULL, 2, 'Store Manager'),"
 					+ "('E00003', 5, NULL, 0.20, 'Angela', 'Foster', '47 Jackson Blvd', 'Joliet', 'IL', '60435', 42.50, NULL, 3, 'Store Manager'),"
@@ -182,16 +182,15 @@ public class data_insertion_jdbc {
 					+ "('E00011', 1, 'E00003', 0.10, 'Grace', 'Ortiz', '23 Fillmore Ave', 'Plainfield', 'IL', '60544', 24.00, NULL, 3, 'Stocker'),"
 					+ "('E00012', 2, 'E00003', 0.15, 'Jordan', 'Pierce', '710 Pierce Rd', 'Joliet', 'IL', '60435', 38.75, NULL, 3, 'Electronics Lead');";
 
-
 			Statement stmt = conn.createStatement();
 			
 			boolean deptTableResults = stmt.execute(deptTable);
 			boolean locationsTableResults = stmt.execute(locationsTable);
 			boolean vendorsTableResults = stmt.execute(vendorsTable);
 			boolean stockTableResults = stmt.execute(stockTable);
+			boolean customersTableResults = stmt.execute(customersTable);
 			boolean ordersTableResults = stmt.execute(ordersTable);
 			boolean orderDetailsTableResults = stmt.execute(orderDetailsTable);
-			boolean customersTableResults = stmt.execute(customersTable);
 			boolean groceryTableResults = stmt.execute(groceryTable);
 			boolean technologyTableResults = stmt.execute(technologyTable);
 			boolean clothingTableResults = stmt.execute(clothingTable);
