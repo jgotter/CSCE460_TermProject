@@ -1,12 +1,12 @@
 -- =====================================================
 -- Sample data for schema `target`
--- Run AFTER target_table_creation.sql
+-- Run AFTER the updated target_table_creation.sql
 -- Tables are loaded in foreign-key order (parents first)
 -- =====================================================
 USE `target`;
 
 -- -----------------------------------------------------
--- Department (10 rows)
+-- Department (5 rows)
 -- -----------------------------------------------------
 INSERT INTO `Department` (`deptID`, `deptName`) VALUES
 (1,  'Grocery'),
@@ -19,16 +19,16 @@ INSERT INTO `Department` (`deptID`, `deptName`) VALUES
 -- Locations (10 rows)
 -- -----------------------------------------------------
 INSERT INTO `Locations` (`locID`, `locName`, `streetAddress`, `city`, `state`, `zipCode`) VALUES
-(1,  'Naperville Store',    '2751 Showplace Dr',       'Naperville',   'IL', '60564'),
+(1,  'Naperville Store',    '2751 Showplace Dr',        'Naperville',   'IL', '60564'),
 (2,  'Aurora Store',        '2380 Orchard Gateway Blvd','Aurora',       'IL', '60506'),
-(3,  'Joliet Store',        '1500 Louis Joliet Rd',    'Joliet',       'IL', '60435'),
-(4,  'Schaumburg Store',    '1950 E Golf Rd',          'Schaumburg',   'IL', '60173'),
-(5,  'Oak Brook Store',     '2000 Spring Rd',          'Oak Brook',    'IL', '60523'),
-(6,  'Downtown Chicago',    '1 S State St',            'Chicago',      'IL', '60603'),
-(7,  'Evanston Store',      '1111 Chicago Ave',        'Evanston',     'IL', '60202'),
-(8,  'Bolingbrook Store',   '225 N Weber Rd',          'Bolingbrook',  'IL', '60440'),
-(9,  'Elgin Store',         '1250 Randall Rd',         'Elgin',        'IL', '60123'),
-(10, 'Lombard Store',       '1 Yorktown Center Dr',    'Lombard',      'IL', '60148');
+(3,  'Joliet Store',        '1500 Louis Joliet Rd',     'Joliet',       'IL', '60435'),
+(4,  'Schaumburg Store',    '1950 E Golf Rd',           'Schaumburg',   'IL', '60173'),
+(5,  'Oak Brook Store',     '2000 Spring Rd',           'Oak Brook',    'IL', '60523'),
+(6,  'Downtown Chicago',    '1 S State St',             'Chicago',      'IL', '60603'),
+(7,  'Evanston Store',      '1111 Chicago Ave',         'Evanston',     'IL', '60202'),
+(8,  'Bolingbrook Store',   '225 N Weber Rd',           'Bolingbrook',  'IL', '60440'),
+(9,  'Elgin Store',         '1250 Randall Rd',          'Elgin',        'IL', '60123'),
+(10, 'Lombard Store',       '1 Yorktown Center Dr',     'Lombard',      'IL', '60148');
 
 -- -----------------------------------------------------
 -- Vendors (10 rows)
@@ -46,130 +46,191 @@ INSERT INTO `Vendors` (`vendorID`, `vendorName`, `vendorCity`, `vendorState`) VA
 (10, 'Comfort Wear Brands',      'Atlanta',       'GA');
 
 -- -----------------------------------------------------
--- Stock (15 rows)
---   1-5   Grocery    (dept 1)
---   6-10  Technology (dept 2)
---   11-15 Clothing   (dept 3)
--- qty is VARCHAR(45) in the schema, so values are quoted strings
+-- Customers (12 rows)
 -- -----------------------------------------------------
-INSERT INTO `Stock` (`stockID`, `qty`, `deptID`, `vendorID`, `locID`) VALUES
-(1,  '250', 1, 1,  1),
-(2,  '180', 1, 2,  2),
-(3,  '320', 1, 7,  3),
-(4,  '210', 1, 9,  4),
-(5,  '140', 1, 1,  5),
-(6,  '45',  2, 3,  1),
-(7,  '30',  2, 4,  2),
-(8,  '60',  2, 8,  6),
-(9,  '25',  2, 3,  7),
-(10, '75',  2, 4,  8),
-(11, '120', 3, 5,  1),
-(12, '95',  3, 6,  9),
-(13, '150', 3, 10, 10),
-(14, '80',  3, 5,  4),
-(15, '110', 3, 6,  5);
+INSERT INTO `Customers` (`custID`, `firstName`, `lastName`, `streetAddress`, `city`, `state`, `zipCode`, `phoneNum`) VALUES
+(1,  'Emily',       'Johnson',   '412 Maple St',      'Naperville',  'IL', '60540', '630-555-0101'),
+(2,  'Michael',     'Rodriguez', '88 Oak Ave',        'Aurora',      'IL', '60505', '630-555-0102'),
+(3,  'Sarah',       'Patel',     '1205 Elm Dr',       'Joliet',      'IL', '60431', '815-555-0103'),
+(4,  'David',       'Nguyen',    '73 Lakeview Ct',    'Schaumburg',  'IL', '60194', '847-555-0104'),
+(5,  'Jessica',     'Williams',  '560 Birch Ln',      'Oak Brook',   'IL', '60523', '630-555-0105'),
+(6,  'Daniel',      'Kim',       '2210 Pine Rd',      'Chicago',     'IL', '60614', '312-555-0106'),
+(7,  'Ashley',      'Brown',     '918 Cedar Blvd',    'Evanston',    'IL', '60201', '847-555-0107'),
+(8,  'Christopher', 'Davis',     '34 Willow Way',     'Bolingbrook', 'IL', '60440', '630-555-0108'),
+(9,  'Megan',       'Martinez',  '147 Sunset Dr',     'Elgin',       'IL', '60120', '847-555-0109'),
+(10, 'Brandon',     'Taylor',    '665 Prairie Ave',   'Lombard',     'IL', '60148', '630-555-0110'),
+(11, 'Olivia',      'Anderson',  '29 Harbor St',      'Naperville',  'IL', '60563', NULL),
+(12, 'Ethan',       'Thomas',    '801 Ridge Rd',      'Aurora',      'IL', '60504', '630-555-0112');
+
+-- -----------------------------------------------------
+-- Grocery (10 rows) - dept 1, item numbers 1001-1010
+-- -----------------------------------------------------
+INSERT INTO `Grocery` (`itemNum`, `itemName`, `deptID`, `expirationDate`, `price`) VALUES
+(1001, 'Whole Milk 1 Gallon',     1, '2026-11-25', 3.89),
+(1002, 'Large Eggs 12ct',         1, '2026-12-05', 3.49),
+(1003, 'Sourdough Bread Loaf',    1, '2026-11-22', 4.29),
+(1004, 'Honeycrisp Apples 3lb',   1, '2026-12-01', 5.99),
+(1005, 'Orange Juice 52oz',       1, '2026-12-15', 4.79),
+(1006, 'Cheddar Cheese Block',    1, '2027-01-10', 3.99),
+(1007, 'Baby Spinach 10oz',       1, '2026-11-24', 3.29),
+(1008, 'Bottled Water 24pk',      1, '2027-08-30', 4.99),
+(1009, 'Chocolate Chip Cookies',  1, '2027-02-14', 3.59),
+(1010, 'Frozen Pizza Pepperoni',  1, '2027-03-20', 6.49);
+
+-- -----------------------------------------------------
+-- Technology (10 rows) - dept 2, item numbers 2001-2010
+-- -----------------------------------------------------
+INSERT INTO `Technology` (`itemNum`, `itemName`, `deptID`, `price`) VALUES
+(2001, 'Wireless Earbuds',             2, 79.99),
+(2002, '55" 4K Smart TV',              2, 399.99),
+(2003, 'Bluetooth Speaker',            2, 49.99),
+(2004, 'Laptop 15.6" 8GB',             2, 649.00),
+(2005, 'Tablet 10" 64GB',              2, 249.99),
+(2006, 'USB-C Charging Cable 6ft',     2, 14.99),
+(2007, 'Gaming Headset',               2, 59.99),
+(2008, 'Smart Watch',                  2, 199.99),
+(2009, 'Wireless Mouse',               2, 24.99),
+(2010, 'Portable Power Bank 10000mAh', 2, 29.99);
+
+-- -----------------------------------------------------
+-- Clothing (10 rows) - dept 3, item numbers 3001-3010
+-- size is VARCHAR(2): XS, S, M, L, XL
+-- -----------------------------------------------------
+INSERT INTO `Clothing` (`itemNum`, `itemName`, `deptID`, `size`) VALUES
+(3001, 'Men''s Crew Neck T-Shirt',   3, 'M'),
+(3002, 'Women''s Skinny Jeans',      3, 'S'),
+(3003, 'Men''s Hooded Sweatshirt',   3, 'L'),
+(3004, 'Women''s Yoga Leggings',     3, 'XS'),
+(3005, 'Kids'' Rain Jacket',         3, 'S'),
+(3006, 'Men''s Denim Jacket',        3, 'XL'),
+(3007, 'Women''s Cardigan',          3, 'M'),
+(3008, 'Men''s Athletic Shorts',     3, 'L'),
+(3009, 'Women''s Button-Up Blouse',  3, 'M'),
+(3010, 'Unisex Fleece Pullover',     3, 'XL');
+
+-- -----------------------------------------------------
+-- Stock (72 rows)
+-- One row = quantity of one item at one location (PK: itemNum + locID)
+-- Every item is stocked at 2-5 of the 10 locations
+-- itemNum matches Grocery (1xxx), Technology (2xxx) or Clothing (3xxx)
+-- deptID matches the item's department
+-- -----------------------------------------------------
+INSERT INTO `Stock` (`itemNum`, `qty`, `deptID`, `vendorID`, `locID`) VALUES
+-- Grocery
+(1001, 250, 1, 2, 1),
+(1001, 180, 1, 2, 2),
+(1001, 200, 1, 2, 3),
+(1001, 300, 1, 2, 6),
+(1001, 160, 1, 2, 8),
+(1002, 220, 1, 2, 1),
+(1002, 190, 1, 2, 4),
+(1002, 170, 1, 2, 5),
+(1003, 320, 1, 7, 3),
+(1003, 150, 1, 7, 1),
+(1003, 140, 1, 7, 9),
+(1004, 140, 1, 1, 5),
+(1004, 110, 1, 1, 2),
+(1004, 130, 1, 1, 7),
+(1005, 210, 1, 9, 4),
+(1005, 175, 1, 9, 6),
+(1005, 120, 1, 9, 10),
+(1006, 90, 1, 2, 2),
+(1006, 85, 1, 2, 8),
+(1007, 75, 1, 1, 1),
+(1007, 60, 1, 1, 9),
+(1008, 400, 1, 9, 4),
+(1008, 350, 1, 9, 10),
+(1008, 280, 1, 9, 3),
+(1009, 130, 1, 7, 3),
+(1009, 115, 1, 7, 7),
+(1010, 95, 1, 1, 5),
+(1010, 80, 1, 1, 6),
+-- Technology
+(2001, 45, 2, 3, 1),
+(2001, 38, 2, 3, 5),
+(2001, 52, 2, 3, 8),
+(2002, 30, 2, 4, 2),
+(2002, 22, 2, 4, 4),
+(2003, 40, 2, 8, 6),
+(2003, 35, 2, 8, 10),
+(2004, 60, 2, 8, 6),
+(2004, 28, 2, 8, 1),
+(2004, 33, 2, 8, 7),
+(2005, 42, 2, 3, 3),
+(2005, 36, 2, 3, 9),
+(2006, 200, 2, 4, 1),
+(2006, 180, 2, 4, 2),
+(2006, 150, 2, 4, 8),
+(2007, 26, 2, 8, 4),
+(2007, 31, 2, 8, 5),
+(2008, 25, 2, 3, 7),
+(2008, 18, 2, 3, 3),
+(2009, 75, 2, 4, 8),
+(2009, 64, 2, 4, 10),
+(2010, 88, 2, 3, 9),
+(2010, 70, 2, 3, 6),
+-- Clothing
+(3001, 120, 3, 5, 1),
+(3001, 100, 3, 5, 2),
+(3001, 90, 3, 5, 9),
+(3002, 95, 3, 6, 9),
+(3002, 70, 3, 6, 5),
+(3003, 150, 3, 10, 10),
+(3003, 110, 3, 10, 4),
+(3004, 80, 3, 5, 4),
+(3004, 65, 3, 5, 7),
+(3005, 60, 3, 10, 2),
+(3005, 55, 3, 10, 10),
+(3006, 110, 3, 6, 5),
+(3006, 75, 3, 6, 3),
+(3007, 85, 3, 5, 6),
+(3007, 70, 3, 5, 1),
+(3008, 120, 3, 10, 8),
+(3008, 100, 3, 10, 9),
+(3009, 90, 3, 5, 7),
+(3009, 60, 3, 5, 2),
+(3010, 140, 3, 10, 3),
+(3010, 105, 3, 10, 5);
 
 -- -----------------------------------------------------
 -- Orders (12 rows)
 -- Cash orders have NULL cardType / cardNumber
 -- (card numbers below are fake)
 -- -----------------------------------------------------
-INSERT INTO `Orders` (`orderNum`, `orderTotal`, `cardType`, `cardNumber`, `orderDate`, `onlineVSInStore`) VALUES
-(1,  45.67,   'Visa',        '4111111111111111', '2026-09-01', 'In-Store'),
-(2,  129.99,  'MasterCard',  '5500000000000004', '2026-09-03', 'Online'),
-(3,  23.45,   NULL,          NULL,               '2026-09-05', 'In-Store'),
-(4,  899.00,  'Target Card', '3782822463100050', '2026-09-08', 'Online'),
-(5,  67.80,   'Debit',       '6011000000000004', '2026-09-12', 'In-Store'),
-(6,  15.99,   NULL,          NULL,               '2026-09-15', 'In-Store'),
-(7,  249.50,  'Visa',        '4012888888881881', '2026-09-18', 'Online'),
-(8,  78.25,   'MasterCard',  '5105105105105100', '2026-09-22', 'In-Store'),
-(9,  34.10,   'Debit',       '6011111111111117', '2026-09-27', 'In-Store'),
-(10, 1299.99, 'Target Card', '3530111333300000', '2026-10-02', 'Online'),
-(11, 52.30,   'Visa',        '4222222222222222', '2026-10-06', 'In-Store'),
-(12, 19.75,   NULL,          NULL,               '2026-10-10', 'In-Store');
+INSERT INTO `Orders` (`orderNum`, `custID`, `orderTotal`, `cardType`, `cardNumber`, `orderDate`, `onlineVSInStore`) VALUES
+(1,  1,  45.67,   'Visa',        '4111111111111111', '2026-09-01', 'In-Store'),
+(2,  2,  129.99,  'MasterCard',  '5500000000000004', '2026-09-03', 'Online'),
+(3,  11, 23.45,   NULL,          NULL,               '2026-09-05', 'In-Store'),
+(4,  5,  899.00,  'Target Card', '3782822463100050', '2026-09-08', 'Online'),
+(5,  3,  67.80,   'Debit',       '6011000000000004', '2026-09-12', 'In-Store'),
+(6,  12, 15.99,   NULL,          NULL,               '2026-09-15', 'In-Store'),
+(7,  4,  249.50,  'Visa',        '4012888888881881', '2026-09-18', 'Online'),
+(8,  6,  78.25,   'MasterCard',  '5105105105105100', '2026-09-22', 'In-Store'),
+(9,  7,  34.10,   'Debit',       '6011111111111117', '2026-09-27', 'In-Store'),
+(10, 8,  1299.99, 'Target Card', '3530111333300000', '2026-10-02', 'Online'),
+(11, 9,  52.30,   'Visa',        '4222222222222222', '2026-10-06', 'In-Store'),
+(12, 10, 19.75,   NULL,          NULL,               '2026-10-10', 'In-Store');
 
 -- -----------------------------------------------------
 -- OrderDetails (15 rows)
+-- Each (itemNum, locID) pair exists in Stock above
 -- -----------------------------------------------------
-INSERT INTO `OrderDetails` (`orderNum`, `stockID`, `locID`, `orderQTY`) VALUES
-(1,  1,  1,  3),
-(1,  3,  3,  2),
-(2,  11, 1,  2),
-(3,  2,  2,  4),
-(4,  6,  1,  1),
-(5,  12, 9,  3),
-(6,  4,  4,  2),
-(7,  7,  2,  1),
-(7,  13, 10, 2),
-(8,  14, 4,  1),
-(9,  5,  5,  5),
-(10, 8,  6,  1),
-(10, 9,  7,  1),
-(11, 15, 5,  2),
-(12, 1,  1,  4);
-
--- -----------------------------------------------------
--- Customers (12 rows)
--- -----------------------------------------------------
-INSERT INTO `Customers` (`custID`, `firstName`, `lastName`, `streetAddress`, `city`, `state`, `zipCode`, `phoneNum`) VALUES
-(1,  'Emily',   'Johnson',   '412 Maple St',      'Naperville',  'IL', '60540', '630-555-0101'),
-(2,  'Michael', 'Rodriguez', '88 Oak Ave',        'Aurora',      'IL', '60505', '630-555-0102'),
-(3,  'Sarah',   'Patel',     '1205 Elm Dr',       'Joliet',      'IL', '60431', '815-555-0103'),
-(4,  'David',   'Nguyen',    '73 Lakeview Ct',    'Schaumburg',  'IL', '60194', '847-555-0104'),
-(5,  'Jessica', 'Williams',  '560 Birch Ln',      'Oak Brook',   'IL', '60523', '630-555-0105'),
-(6,  'Daniel',  'Kim',       '2210 Pine Rd',      'Chicago',     'IL', '60614', '312-555-0106'),
-(7,  'Ashley',  'Brown',     '918 Cedar Blvd',    'Evanston',    'IL', '60201', '847-555-0107'),
-(8,  'Christopher','Davis',  '34 Willow Way',     'Bolingbrook', 'IL', '60440', '630-555-0108'),
-(9,  'Megan',   'Martinez',  '147 Sunset Dr',     'Elgin',       'IL', '60120', '847-555-0109'),
-(10, 'Brandon', 'Taylor',    '665 Prairie Ave',   'Lombard',     'IL', '60148', '630-555-0110'),
-(11, 'Olivia',  'Anderson',  '29 Harbor St',      'Naperville',  'IL', '60563', NULL),
-(12, 'Ethan',   'Thomas',    '801 Ridge Rd',      'Aurora',      'IL', '60504', '630-555-0112');
-
--- -----------------------------------------------------
--- Grocery (10 rows) - stockIDs 1-5, dept 1
--- -----------------------------------------------------
-INSERT INTO `Grocery` (`itemNum`, `itemName`, `deptID`, `stockID`, `expirationDate`, `price`) VALUES
-(1001, 'Whole Milk 1 Gallon',     1, 2, '2026-11-25', 3.89),
-(1002, 'Large Eggs 12ct',         1, 2, '2026-12-05', 3.49),
-(1003, 'Sourdough Bread Loaf',    1, 3, '2026-11-22', 4.29),
-(1004, 'Honeycrisp Apples 3lb',   1, 1, '2026-12-01', 5.99),
-(1005, 'Orange Juice 52oz',       1, 4, '2026-12-15', 4.79),
-(1006, 'Cheddar Cheese Block',    1, 2, '2027-01-10', 3.99),
-(1007, 'Baby Spinach 10oz',       1, 1, '2026-11-24', 3.29),
-(1008, 'Bottled Water 24pk',      1, 4, '2027-08-30', 4.99),
-(1009, 'Chocolate Chip Cookies',  1, 3, '2027-02-14', 3.59),
-(1010, 'Frozen Pizza Pepperoni',  1, 5, '2027-03-20', 6.49);
-
--- -----------------------------------------------------
--- Technology (10 rows) - stockIDs 6-10, dept 2
--- -----------------------------------------------------
-INSERT INTO `Technology` (`itemNum`, `itemName`, `deptID`, `stockID`, `price`) VALUES
-(2001, 'Wireless Earbuds',            2, 6,  79.99),
-(2002, '55" 4K Smart TV',             2, 7,  399.99),
-(2003, 'Bluetooth Speaker',           2, 6,  49.99),
-(2004, 'Laptop 15.6" 8GB',            2, 8,  649.00),
-(2005, 'Tablet 10" 64GB',             2, 8,  249.99),
-(2006, 'USB-C Charging Cable 6ft',    2, 9,  14.99),
-(2007, 'Gaming Headset',              2, 10, 59.99),
-(2008, 'Smart Watch',                 2, 9,  199.99),
-(2009, 'Wireless Mouse',              2, 10, 24.99),
-(2010, 'Portable Power Bank 10000mAh',2, 7,  29.99);
-
--- -----------------------------------------------------
--- Clothing (10 rows) - stockIDs 11-15, dept 3
--- size is VARCHAR(2): XS, S, M, L, XL
--- -----------------------------------------------------
-INSERT INTO `Clothing` (`itemNum`, `itemName`, `deptID`, `stockID`, `size`) VALUES
-(3001, 'Men''s Crew Neck T-Shirt',   3, 11, 'M'),
-(3002, 'Women''s Skinny Jeans',      3, 12, 'S'),
-(3003, 'Men''s Hooded Sweatshirt',   3, 13, 'L'),
-(3004, 'Women''s Yoga Leggings',     3, 14, 'XS'),
-(3005, 'Kids'' Rain Jacket',         3, 15, 'S'),
-(3006, 'Men''s Denim Jacket',        3, 12, 'XL'),
-(3007, 'Women''s Cardigan',          3, 11, 'M'),
-(3008, 'Men''s Athletic Shorts',     3, 13, 'L'),
-(3009, 'Women''s Button-Up Blouse',  3, 14, 'M'),
-(3010, 'Unisex Fleece Pullover',     3, 15, 'XL');
+INSERT INTO `OrderDetails` (`orderNum`, `itemNum`, `locID`, `orderQTY`) VALUES
+(1,  1001, 1,  3),
+(1,  1003, 3,  2),
+(2,  3001, 1,  2),
+(3,  1001, 2,  4),
+(4,  2001, 1,  1),
+(5,  3002, 9,  3),
+(6,  1005, 4,  2),
+(7,  2002, 2,  1),
+(7,  3003, 10, 2),
+(8,  3004, 4,  1),
+(9,  1004, 5,  5),
+(10, 2004, 6,  1),
+(10, 2008, 7,  1),
+(11, 3006, 5,  2),
+(12, 1001, 1,  4);
 
 -- -----------------------------------------------------
 -- RedCard (10 rows) - custIDs must exist in Customers
@@ -183,7 +244,7 @@ INSERT INTO `RedCard` (`custID`, `cardNumber`, `savings`) VALUES
 (5,  '7000100005', 130.15),
 (6,  '7000100006', 27.60),
 (7,  '7000100007', 64.30),
-(8,  '7000100008', 0.00,
+(8,  '7000100008', 0.00),
 (9,  '7000100009', 19.99),
 (10, '7000100010', 52.05);
 
