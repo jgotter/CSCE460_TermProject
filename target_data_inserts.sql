@@ -96,17 +96,17 @@ INSERT INTO `Technology` (`itemNum`, `itemName`, `deptID`, `price`) VALUES
 -- Clothing (10 rows) - dept 3, item numbers 3001-3010
 -- size is VARCHAR(2): XS, S, M, L, XL
 -- -----------------------------------------------------
-INSERT INTO `Clothing` (`itemNum`, `itemName`, `deptID`, `size`) VALUES
-(3001, 'Men''s Crew Neck T-Shirt',   3, 'M'),
-(3002, 'Women''s Skinny Jeans',      3, 'S'),
-(3003, 'Men''s Hooded Sweatshirt',   3, 'L'),
-(3004, 'Women''s Yoga Leggings',     3, 'XS'),
-(3005, 'Kids'' Rain Jacket',         3, 'S'),
-(3006, 'Men''s Denim Jacket',        3, 'XL'),
-(3007, 'Women''s Cardigan',          3, 'M'),
-(3008, 'Men''s Athletic Shorts',     3, 'L'),
-(3009, 'Women''s Button-Up Blouse',  3, 'M'),
-(3010, 'Unisex Fleece Pullover',     3, 'XL');
+INSERT INTO `Clothing` (`itemNum`, `itemName`, `deptID`, `size`, `price`) VALUES
+(3001, 'Men''s Crew Neck T-Shirt',   3, 'M',  14.99),
+(3002, 'Women''s Skinny Jeans',      3, 'S',  34.99),
+(3003, 'Men''s Hooded Sweatshirt',   3, 'L',  39.99),
+(3004, 'Women''s Yoga Leggings',     3, 'XS', 29.99),
+(3005, 'Kids'' Rain Jacket',         3, 'S',  44.99),
+(3006, 'Men''s Denim Jacket',        3, 'XL', 59.99),
+(3007, 'Women''s Cardigan',          3, 'M',  36.99),
+(3008, 'Men''s Athletic Shorts',     3, 'L',  22.99),
+(3009, 'Women''s Button-Up Blouse',  3, 'M',  27.99),
+(3010, 'Unisex Fleece Pullover',     3, 'XL', 42.99);
 
 -- -----------------------------------------------------
 -- Stock (72 rows)
