@@ -195,6 +195,7 @@ CREATE TABLE IF NOT EXISTS `target`.`Clothing` (
   `itemName` VARCHAR(45) NOT NULL,
   `deptID` INT NOT NULL,
   `size` VARCHAR(2) NOT NULL,
+  `price` DECIMAL(9,2) NOT NULL,
   PRIMARY KEY (`itemNum`),
   INDEX `deptID_idx` (`deptID` ASC) VISIBLE,
   CONSTRAINT `clothingDeptID`
